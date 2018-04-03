@@ -9,8 +9,8 @@ public class GroceryItem {
 
     public GroceryItem() {
         day = LocalDate.now();
-        item = "";
-        price = 0;
+        item = "juice";
+        price = 2;
     }
     public GroceryItem(LocalDate day, String item, int price) {
         this.day = day;

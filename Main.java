@@ -10,8 +10,8 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         System.out.println("Hello World! ");
 
-        GroceryItem cart1 = new GroceryItem();
-        GroceryItem cart2 = new GroceryItem();
+        GroceryItem cart1 = new GroceryItem(LocalDate.now(), "eggs", 5);
+        GroceryItem cart2 = new GroceryItem(LocalDate.now().minusWeeks(2), "water", 3);
         GroceryItem cart3 = new GroceryItem();
 
         ArrayList<GroceryItem> groceries = new ArrayList<>();
