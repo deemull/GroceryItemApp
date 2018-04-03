@@ -3,9 +3,9 @@ package com.company;
 import java.time.LocalDate;
 
 public class GroceryItem {
-    LocalDate day;
-    String item;
-    int price;
+    private LocalDate day;
+    private String item;
+    private int price;
 
     public GroceryItem() {
         day = LocalDate.now();
@@ -44,11 +44,7 @@ public class GroceryItem {
 
     @Override
     public String toString() {
-        return "GroceryItem{" +
-                "day=" + day +
-                ", item='" + item + '\'' +
-                ", price=" + price +
-                '}';
+        return day +"|" + item + '|' + price + "\n";
     }
 
     @Override
