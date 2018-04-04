@@ -25,7 +25,7 @@ public class Main {
         writeInFile(groceries);
 
         //Number of items were purchased during the last visit to the grocery store
-        ArrayList<GroceryItem> numItemsPurchasedLastVisit = howManyPurchasedLastVisit(groceries);
+        int numItemsPurchasedLastVisit = howManyPurchasedLastVisit(groceries);
         System.out.println("How many items purchased last visit? " + numItemsPurchasedLastVisit);
 
 
@@ -56,14 +56,14 @@ public class Main {
         printWriter.close();
     }
 
-    public static ArrayList<GroceryItem> howManyPurchasedLastVisit(ArrayList<GroceryItem> groceries) {
-        ArrayList<GroceryItem> items = new ArrayList<>();
+    public static int howManyPurchasedLastVisit(ArrayList<GroceryItem> groceries) {
+        int count = 0;
         for (int i = 0; i < groceries.size(); i++) {
             if (groceries.get(i).getDay().isAfter(groceries.get(i+1).getDay())) {
-                items.add(groceries.get(i));
+                count++;
             }
         }
-        return items;
+        return count;
     }
     public static int totalPricesPurchasedOn(ArrayList<GroceryItem> groceries, LocalDate date) {
         int sum = 0;
