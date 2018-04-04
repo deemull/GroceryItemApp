@@ -25,10 +25,11 @@ public class Main {
         writeInFile(groceries);
 
         //Number of items were purchased during the last visit to the grocery store
-        int numItemsPurchasedLastVisit = howManyPurchasedLastVisit(groceries);
+        ArrayList<GroceryItem> numItemsPurchasedLastVisit = howManyPurchasedLastVisit(groceries);
         System.out.println("How many items purchased last visit? " + numItemsPurchasedLastVisit);
 
 
+        //
         LocalDate yesterday = LocalDate.now().minusDays(1);// yesterday's date as a LocalDate object
         int total = totalPricesPurchasedOn( groceries, yesterday );
         System.out.println(total);
@@ -41,9 +42,8 @@ public class Main {
 
 
         //
-        String userItemInput = "eggs";
-        int amountOfTimesPurchased = numTimesItemPurchased(groceries, userItemInput);
-        System.out.println(userItemInput + " Purchase Occurrence(s): " + amountOfTimesPurchased);
+        int amountOfTimesPurchased = numTimesItemPurchased(groceries, "eggs");
+        System.out.println("eggs" + " Purchase Occurrence(s): " + amountOfTimesPurchased);
 
 
 
@@ -56,14 +56,14 @@ public class Main {
         printWriter.close();
     }
 
-    public static int howManyPurchasedLastVisit(ArrayList<GroceryItem> groceries) {
-        int count = 0;
+    public static ArrayList<GroceryItem> howManyPurchasedLastVisit(ArrayList<GroceryItem> groceries) {
+        ArrayList<GroceryItem> items = new ArrayList<>();
         for (int i = 0; i < groceries.size(); i++) {
-            if (groceries.get(i).getDay().isAfter(LocalDate.now().minusDays(1))) {
-                count++;
+            if (groceries.get(i).getDay().isAfter(groceries.get(i+1).getDay())) {
+                items.add(groceries.get(i));
             }
         }
-        return count;
+        return items;
     }
     public static int totalPricesPurchasedOn(ArrayList<GroceryItem> groceries, LocalDate date) {
         int sum = 0;
@@ -74,14 +74,12 @@ public class Main {
         }
         return sum;
     }
-    private static ArrayList<String> itemsPurchasedOverAmount(ArrayList<GroceryItem> listOfItems) {
-        String item = "";
+    private static ArrayList<String> itemsPurchasedOverAmount(ArrayList<GroceryItem> groceries) {
         int itemAmount = 10;
         ArrayList<String> itemsOverAmount = new ArrayList<>();
-        for (int i = 0; i < listOfItems.size(); i++) {
-            if (listOfItems.get(i).getPrice() > itemAmount) {
-                item = listOfItems.get(i).getItem();
-                itemsOverAmount.add(item);
+        for (int i = 0; i < groceries.size(); i++) {
+            if (groceries.get(i).getPrice() > itemAmount) {
+                itemsOverAmount.add(groceries.get(i).getItem());
             }
         }
         return itemsOverAmount;
