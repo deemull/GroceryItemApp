@@ -37,7 +37,7 @@ public class Main {
         //int itemTotal = countItem();
 
         //Items purchased that cost more than $10
-        ArrayList<String> storeList = itemsPurchasedOverAmount(groceries);
+        ArrayList<GroceryItem> storeList = itemsPurchasedOverAmount(groceries);
         System.out.println("Purchased Item(s) over $10.00: " + storeList);
 
 
@@ -74,12 +74,12 @@ public class Main {
         }
         return sum;
     }
-    private static ArrayList<String> itemsPurchasedOverAmount(ArrayList<GroceryItem> groceries) {
+    private static ArrayList<GroceryItem> itemsPurchasedOverAmount(ArrayList<GroceryItem> groceries) {
         int itemAmount = 10;
-        ArrayList<String> itemsOverAmount = new ArrayList<>();
+        ArrayList<GroceryItem> itemsOverAmount = new ArrayList<>();
         for (int i = 0; i < groceries.size(); i++) {
             if (groceries.get(i).getPrice() > itemAmount) {
-                itemsOverAmount.add(groceries.get(i).getItem());
+                itemsOverAmount.add(groceries.get(i));
             }
         }
         return itemsOverAmount;
