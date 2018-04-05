@@ -22,7 +22,7 @@ public class Main {
         GroceryList groceryItems = new GroceryList();
 
         //Write grocery item(s) to the file input.txt
-        writeInFile(groceries);
+        groceryItems.writeInFile(groceries);
 
         //Number of items were purchased during the last visit to the grocery store
         int numItemsPurchasedLastVisit = groceryItems.howManyPurchasedLastVisit(groceries);
