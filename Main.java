@@ -48,15 +48,6 @@ public class Main {
 
     }
 
-    public static LocalDate lastDate(ArrayList<GroceryItem> groceries, LocalDate date) {
-        for (int i = 0; i < groceries.size(); i++) {
-            if (groceries.get(i).getDay().isAfter(groceries.get(i + 1).getDay())) {
-                date = groceries.get(i).getDay();
-            }
-        }
-        return date;
-    }
-
     private static void writeInFile(ArrayList<GroceryItem> groceryItems) throws FileNotFoundException {
         PrintWriter printWriter = new PrintWriter("input.txt");
         //writes a nullable object to the PrintWriter
@@ -65,9 +56,15 @@ public class Main {
     }
 
     public static int howManyPurchasedLastVisit(ArrayList<GroceryItem> groceries) {
+        LocalDate date = groceries.get(0).getDay();
         int count = 0;
         for (int i = 0; i < groceries.size(); i++) {
-            if (groceries.get(i).getDay().equals(lastDate(groceries, groceries.get(i).getDay()))) {
+            if (groceries.get(i).getDay().isAfter(date)) {
+                date = groceries.get(i).getDay();
+            }
+        }
+        for (int i = 0; i < groceries.size(); i++) {
+            if (date == groceries.get(i).getDay()) {
                 count++;
             }
         }
