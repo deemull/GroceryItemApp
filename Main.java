@@ -25,24 +25,24 @@ public class Main {
         writeInFile(groceries);
 
         //Number of items were purchased during the last visit to the grocery store
-        int numItemsPurchasedLastVisit = howManyPurchasedLastVisit(groceries);
+        int numItemsPurchasedLastVisit = groceryItems.howManyPurchasedLastVisit(groceries);
         System.out.println("How many items purchased last visit? " + numItemsPurchasedLastVisit);
 
 
         //
         LocalDate yesterday = LocalDate.now().minusDays(1);// yesterday's date as a LocalDate object
-        int total = totalPricesPurchasedOn(groceries, yesterday);
+        int total = groceryItems.totalPricesPurchasedOn(groceries, yesterday);
         System.out.println(total);
 
         //int itemTotal = countItem();
 
         //Items purchased that cost more than $10
-        ArrayList<GroceryItem> storeList = itemsPurchasedOverAmount(groceries);
+        ArrayList<GroceryItem> storeList = groceryItems.itemsPurchasedOverAmount(groceries);
         System.out.println("Purchased Item(s) over $10.00: " + storeList);
 
 
         //
-        int amountOfTimesPurchased = numTimesItemPurchased(groceries, "eggs");
+        int amountOfTimesPurchased = groceryItems.numTimesItemPurchased(groceries, "eggs");
         System.out.println("eggs" + " Purchase Occurrence(s): " + amountOfTimesPurchased);
 
 
