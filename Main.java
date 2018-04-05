@@ -31,7 +31,7 @@ public class Main {
 
         //
         LocalDate yesterday = LocalDate.now().minusDays(1);// yesterday's date as a LocalDate object
-        int total = totalPricesPurchasedOn( groceries, yesterday );
+        int total = totalPricesPurchasedOn(groceries, yesterday);
         System.out.println(total);
 
         //int itemTotal = countItem();
@@ -46,7 +46,15 @@ public class Main {
         System.out.println("eggs" + " Purchase Occurrence(s): " + amountOfTimesPurchased);
 
 
+    }
 
+    public static LocalDate lastDate(ArrayList<GroceryItem> groceries, LocalDate date) {
+        for (int i = 0; i < groceries.size(); i++) {
+            if (groceries.get(i).getDay().isAfter(groceries.get(i + 1).getDay())) {
+                date = groceries.get(i).getDay();
+            }
+        }
+        return date;
     }
 
     private static void writeInFile(ArrayList<GroceryItem> groceryItems) throws FileNotFoundException {
@@ -59,12 +67,13 @@ public class Main {
     public static int howManyPurchasedLastVisit(ArrayList<GroceryItem> groceries) {
         int count = 0;
         for (int i = 0; i < groceries.size(); i++) {
-            if (groceries.get(i).getDay().isAfter(groceries.get(i+1).getDay())) {
+            if (groceries.get(i).getDay().equals(lastDate(groceries, groceries.get(i).getDay()))) {
                 count++;
             }
         }
         return count;
     }
+
     public static int totalPricesPurchasedOn(ArrayList<GroceryItem> groceries, LocalDate date) {
         int sum = 0;
         for (int i = 0; i < groceries.size(); i++) {
@@ -74,6 +83,7 @@ public class Main {
         }
         return sum;
     }
+
     private static ArrayList<GroceryItem> itemsPurchasedOverAmount(ArrayList<GroceryItem> groceries) {
         int itemAmount = 10;
         ArrayList<GroceryItem> itemsOverAmount = new ArrayList<>();
@@ -84,6 +94,7 @@ public class Main {
         }
         return itemsOverAmount;
     }
+
     private static int numTimesItemPurchased(ArrayList<GroceryItem> groceries, String storeItem) {
         int count = 0;
         for (int i = 0; i < groceries.size(); i++) {
